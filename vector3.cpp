@@ -1,6 +1,7 @@
 #include "vector3.h"
 #include "stdio.h"
 #include "iostream"
+#include "math.h"
 
 
 using namespace std;
@@ -48,4 +49,34 @@ void Vector3::sub(Vector3 *vect)
 
 }
 
+void Vector3::normalize()
+{
+    float n = magnitude();
+    if (n > 0)
+    {
+        (*this)*=((float)1/n);
+    }
+}
+
+float Vector3::magnitude()
+{
+    return sqrtf(x*x+y*y+z*z);
+}
+
+float Vector3::square_magnitude()
+{
+    return x*x+y*y+z*z;
+}
+
+void Vector3::operator*=(const float value)
+{
+    this->x *= value;
+    this->y *= value;
+    this->z *= value;
+}
+
+Vector3 Vector3::operator*(const float value) const
+{
+    return Vector3(x*value, y* value, z*value);
+}
 

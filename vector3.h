@@ -14,6 +14,11 @@ public:
     void print();
     void add(Vector3*);
     void sub(Vector3*);
+    void normalize();
+    float magnitude();
+    float square_magnitude();
+    void operator*=(const float value);
+    Vector3 operator*(const float value) const;
 };
 
 #endif // VECTOR3_H
