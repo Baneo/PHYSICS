@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    vector3.cpp
+    point3d.cpp \
+    vector3D.cpp
 
 HEADERS += \
         mainwindow.h \
-    vector3.h
+    point3d.h \
+    vector3D.h
 
 FORMS += \
         mainwindow.ui
