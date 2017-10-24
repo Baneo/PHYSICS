@@ -36,3 +36,10 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui
+
+
+# TODO
+# Rotation
+# Translation
+# Symetrie
+#
