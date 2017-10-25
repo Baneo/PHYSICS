@@ -27,12 +27,15 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     point3d.cpp \
-    vector3D.cpp
+    vector3D.cpp \
+    particle.cpp
 
 HEADERS += \
         mainwindow.h \
     point3d.h \
-    vector3D.h
+    vector3D.h \
+    particle.h \
+    precision.h
 
 FORMS += \
         mainwindow.ui

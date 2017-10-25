@@ -2,21 +2,21 @@
 #define POINT3D_H
 
 #include <iostream>
-
+#include "precision.h"
 
 class Point3D
 {
 private:
-    float x;
-    float y;
-    float z;
+    real x;
+    real y;
+    real z;
 
 public:
     Point3D();
-    Point3D(const float x, const float y, const float z);
-    float getX() const;
-    float getY() const;
-    float getZ() const;
+    Point3D(const real x, const real y, const real z);
+    real getX() const;
+    real getY() const;
+    real getZ() const;
 };
 
 #endif // POINT3D_H

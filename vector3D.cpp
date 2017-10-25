@@ -4,17 +4,17 @@
 #include "math.h"
 
 
-float Vector3D::getX() const
+real Vector3D::getX() const
 {
     return x;
 }
 
-float Vector3D::getY() const
+real Vector3D::getY() const
 {
     return y;
 }
 
-float Vector3D::getZ() const
+real Vector3D::getZ() const
 {
     return z;
 }
@@ -27,7 +27,7 @@ Vector3D::Vector3D()
     std::cout << "Vector created by default\n";
 }
 
-Vector3D::Vector3D(float x, float y, float z)
+Vector3D::Vector3D(real x, real y, real z)
 {
     this->x = x;
     this->y = y;
@@ -62,38 +62,38 @@ void Vector3D::sub(Vector3D *vect)
 
 }
 
+real Vector3D::magnitude() const
+{
+    return real_sqrt(x*x+y*y+z*z);
+}
+
 void Vector3D::normalize()
 {
-    float n = magnitude();
+    real n = magnitude();
     if (n > 0)
     {
-        (*this)*=((float)1/n);
+        (*this)*=((real)1)/n;
     }
 }
 
-float Vector3D::magnitude()
-{
-    return sqrtf(x*x+y*y+z*z);
-}
-
-float Vector3D::square_magnitude()
+real Vector3D::square_magnitude()
 {
     return x*x+y*y+z*z;
 }
 
-void Vector3D::operator*=(const float value)
+void Vector3D::operator*=(const real value)
 {
     x *= value;
     y *= value;
     z *= value;
 }
 
-Vector3D Vector3D::operator*(const float value) const
+Vector3D Vector3D::operator*(const real value) const
 {
     return Vector3D(x*value, y* value, z*value);
 }
 
-float Vector3D::scalar_product(Vector3D *vect)
+real Vector3D::scalar_product(Vector3D *vect)
 {
     return vect->x * x + vect->y * y + vect->z * z;
 }
@@ -127,7 +127,7 @@ Vector3D Vector3D::operator-(const Vector3D& v)const
     return Vector3D(x-v.x,y-v.y,z-v.z);
 }
 
-void Vector3D::add_scaled_vector(const Vector3D& v, float scale)
+void Vector3D::add_scaled_vector(const Vector3D& v, real scale)
 {
     x += v.x * scale;
     y += v.y * scale;
@@ -146,7 +146,7 @@ void Vector3D::component_product_update(const Vector3D& v)
     z *= v.z;
 }
 
-float Vector3D::operator*(const Vector3D& v)
+real Vector3D::operator*(const Vector3D& v)
 {
     return x*v.x+y*v.y+z*v.z;
 }
