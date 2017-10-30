@@ -1,7 +1,7 @@
 #include "vector3D.h"
 #include "stdio.h"
 #include "iostream"
-#include "math.h"
+
 
 
 real Vector3D::getX() const
@@ -74,6 +74,13 @@ void Vector3D::normalize()
     {
         (*this)*=((real)1)/n;
     }
+}
+
+Vector3D Vector3D::unit() const
+{
+    Vector3D result = *this;
+    result.normalize();
+    return result;
 }
 
 real Vector3D::square_magnitude()
@@ -164,4 +171,69 @@ Vector3D Vector3D::operator%(const Vector3D& v) const
 {
     return Vector3D(y*v.z-z*v.y, z*v.x-x*v.z, x*v.y-y*v.x);
 }
+
+
+real Vector3D::operator[](unsigned i) const
+{
+    if (i == 0) return x;
+    if (i == 1) return y;
+    return z;
+}
+
+real& Vector3D::operator[](unsigned i)
+{
+    if (i == 0) return x;
+    if (i == 1) return y;
+    return z;
+}
+
+void Vector3D::trim(real limit)
+{
+    if(square_magnitude() > limit*limit)
+    {
+        normalize();
+        x *= limit;
+        y *= limit;
+        z *= limit;
+    }
+}
+
+bool Vector3D::operator==(const Vector3D& vect) const
+{
+    return x == vect.getX() && y == vect.getY() && z == vect.getZ();
+}
+
+bool Vector3D::operator!=(const Vector3D& vect)const
+{
+    return !(*this == vect);
+}
+bool Vector3D::operator<(const Vector3D& vect) const
+{
+    return x < vect.getX() && y < vect.getY() && z < vect.getZ();
+}
+
+bool Vector3D::operator>(const Vector3D& vect) const
+{
+    return x > vect.getX() && y > vect.getY() && z > vect.getZ();
+}
+
+bool Vector3D::operator<=(const Vector3D& vect) const
+{
+    return x <= vect.getX() && y <= vect.getY() && z <= vect.getZ();
+}
+
+bool Vector3D::operator>=(const Vector3D& vect) const
+{
+    return x >= vect.getX() && y >= vect.getY() && z >= vect.getZ();
+}
+
+void Vector3D::clear()
+{
+    x = y = z = 0;
+}
+
+
+
+
+
 

@@ -1,8 +1,11 @@
 #ifndef PRECISION_H
 #define PRECISION_H
 
-#define real_sqrt sqrtf;
-#define real_pow powf;
+#include "math.h"
+
+#define real_sqrt sqrtf
+#define real_pow powf
+
 
 typedef float real;
 
