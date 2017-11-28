@@ -35,6 +35,20 @@ const char* vectDemo::getTitle()
     return "DiceShard->Vecteurs";
 }
 
+void vectDemo::mouse(int button, int state, int x, int y)
+{
+    if (button == GLUT_RIGHT_BUTTON) {
+        exit(0);
+    }
+}
+
+void vect::key(unsigned char key)
+{
+    if (c == 27) {
+        exit(0);
+    }
+}
+
 void VectDemo::update()
 {
     // Find the duration of the last frame in seconds
@@ -59,4 +73,9 @@ void FireworksDemo::display()
     glVertex3f(0, 0, 0);
         glVertex3f(vect->getX(), vect->getY(), vect->getZ());
     glEnd();
+}
+
+Application* getApplication()
+{
+    return new vectDemo();
 }
