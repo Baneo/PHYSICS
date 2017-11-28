@@ -3,6 +3,21 @@
 #include "iostream"
 
 
+real Vector3D::setX(real a)
+{
+    x = a;
+}
+
+real Vector3D::setY(real a)
+{
+    y = a;
+}
+
+real Vector3D::setZ(real a)
+{
+    z = a;
+}
+
 
 real Vector3D::getX() const
 {
