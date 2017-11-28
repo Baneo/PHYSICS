@@ -5,6 +5,7 @@
 #include "timing.h"
 
 Vector3D *vect = new Vector3D(0.0f,40.0f,0.0f);//In heap for long time use (return pointer)
+int i = 10;
 
 class VectDemo : public Application
 {
@@ -45,16 +46,11 @@ const char* VectDemo::getTitle()
 void VectDemo::mouse(int button, int state, int x, int y)
 {
     if (button == GLUT_RIGHT_BUTTON) {
-        exit(0);
     }
 }
 
 void VectDemo::key(unsigned char key)
 {
-     switch(key)
-    {
-    case '1': exit(0);
-    }
 }
 
 void VectDemo::update()
@@ -62,7 +58,8 @@ void VectDemo::update()
     // Find the duration of the last frame in seconds
     float duration = (float)TimingData::get().lastFrameDuration * 0.001f;
     if (duration <= 0.0f) return;
-    vect->setY(vect->getY()+1);
+    i=-i;
+    std::cout<<i;
     Application::update();
 }
 
@@ -75,11 +72,8 @@ void VectDemo::display()
     glLoadIdentity();
     //gluLookAt(0.0, 4.0, 10.0,  0.0, 4.0, 0.0,  0.0, 1.0, 0.0);
 
-    // Render each firework in turn
-    glBegin(GL_QUADS);
-
-    glVertex3f(0, 0, 0);
-        glVertex3f(vect->getX(), vect->getY(), vect->getZ());
+    glBegin(GL_LINES);
+    glVertex3f(0, 0, 0);glVertex3f(i, i, i);
     glEnd();
 }
 
@@ -98,10 +92,10 @@ Application* app;
  */
 void createWindow(const char* title)
 {
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize(640,320);
-    glutInitWindowPosition(0,0);
-    glutCreateWindow(title);
+	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
+	glutInitWindowPosition(100, 100);
+	glutInitWindowSize(640, 480);
+	glutCreateWindow(title);
 }
 
 /**
@@ -124,7 +118,6 @@ void update()
 void display()
 {
     app->display();
-
     // Update the displayed content.
     glFlush();
     glutSwapBuffers();
