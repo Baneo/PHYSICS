@@ -12,6 +12,9 @@ private:
     real pad; //4 word alignment
 
 public:
+    real setX(real);
+    real setY(real);
+    real setZ(real);
     real getX() const; //Getter X
     real getY() const; //Getter Y
     real getZ() const; //Getter Z
