@@ -1,6 +1,8 @@
 #include <GL/glut.h>
 #include <iostream>
+
 #include "vector3D.h"
+
 
 void render(void);
 
@@ -36,6 +38,7 @@ void mouse(int button, int state, int x, int y) {
 
 void render(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	Vector3D vect;//In stack for short time use (return object)
     Vector3D *vect2 = new Vector3D(0,40,0);//In heap for long time use (return pointer)
     Vector3D *vect3 = new Vector3D(10,50,50);
@@ -46,6 +49,7 @@ void render(void) {
   		glVertex3f(0, 0, 0);
   		glVertex3f(vect3->getX(), vect3->getY(), vect3->getZ());
 	glEnd();
+
 
 
 	glutSwapBuffers();
