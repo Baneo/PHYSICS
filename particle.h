@@ -15,6 +15,33 @@ public:
     real inverse_mass; //inverse mass of the particle, integration simpler and more useful, beter to have infinite mass than zero mass
 
     void integrate(real duration);
+    
+    void setPosition(const Vector3D &position);
+    void setPosition(const real x, const real y, const real z);
+
+    void getPosition(Vector3D *position)const;
+    Vector3D getPosition()const;
+
+    void setVelocity(const Vector3D &velocity);
+    void setVelocity(const real x, const real y, const real z);
+
+    void getVelocity(Vector3D *position)const;
+    Vector3D getVelocity()const;
+
+    void setMass(const real mass);
+	real getMass()const;
+
+	void setDamping(const real damping);
+	real getDamping()const;
+
+	void setAcceleration(const Vector3D &acceleration);
+	void setAcceleration(const real x, const real y, const real z);
+
+	void getAcceleration(Vector3D *acceleration)const;
+    Vector3D getAcceleration()const;
+
+    void clearAccumulator();
+
 };
 
 #endif // PARTICLE_H

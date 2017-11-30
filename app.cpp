@@ -10,13 +10,14 @@
  * software licence.
  */
 #include <cstring>
-#include "ogl_headers.h"
+#include "inc.h"
+#include <GL/glut.h>
 #include "app.h"
 #include "timing.h"
 
 void Application::initGraphics()
 {
-    //glClearColor(0.9f, 0.95f, 1.0f, 1.0f);
+    glClearColor(0.9f, 0.95f, 1.0f, 1.0f);
     glEnable(GL_DEPTH_TEST);
     glShadeModel(GL_SMOOTH);
 
@@ -27,17 +28,17 @@ void Application::setView()
 {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    //gluPerspective(60.0, (double)width/(double)height, 1.0, 500.0);
+    gluPerspective(60.0, (double)width/(double)height, 1.0, 500.0);
     glMatrixMode(GL_MODELVIEW);
 }
 
 void Application::display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-   // glBegin(GL_LINES);
-    //glVertex2i(1, 1);
-    //glVertex2i(639, 319);
-    //glEnd();
+    glBegin(GL_LINES);
+    glVertex2i(1, 1);
+    glVertex2i(639, 319);
+    glEnd();
 }
 
 const char* Application::getTitle()
