@@ -133,7 +133,7 @@ class FireWorkApp : public Application
 
     int nextFirework;
 
-    const static int ruleCount = 9;
+    const static int ruleCount = 3;
 
     FireworkRule rules[ruleCount];
 
@@ -179,7 +179,7 @@ FireWorkApp::~FireWorkApp()
 
 void FireWorkApp::initFireworkRules()
 {
-    // Go through the firework types and create their rules.
+    // Les regles regissant les particules.
     rules[0].init(2);
     rules[0].setParameters(
         1, // type
@@ -193,57 +193,19 @@ void FireWorkApp::initFireworkRules()
         2, // type
         0.8 // damping
         );
-    rules[1].payloads[0].set(4, 2);
+    rules[1].payloads[0].set(2, 2);
 
     rules[2].init(0);
     rules[2].setParameters(
         3, // type
         0.1 // damping
         );
-
-    rules[3].init(0);
-    rules[3].setParameters(
-        4, // type
-        0.2 // damping
-        );
-
-    rules[4].init(1);
-    rules[4].setParameters(
-        5, // type
-        0.01 // damping
-        );
-    rules[4].payloads[0].set(3, 5);
-
-    rules[5].init(0);
-    rules[5].setParameters(
-        6, // type
-        0.95 // damping
-        );
-
-    rules[6].init(1);
-    rules[6].setParameters(
-        7, // type
-        0.01 // damping
-        );
-    rules[6].payloads[0].set(8, 10);
-
-    rules[7].init(0);
-    rules[7].setParameters(
-        8, // type
-        0.01 // damping
-        );
-
-    rules[8].init(0);
-    rules[8].setParameters(
-        9, // type
-        0.95 // damping
-        );
 }
 
 void FireWorkApp::initGraphics()
 {
-    Application::initGraphics(); //Get the initGraphics from superclass
-    glClearColor(0.0f, 0.0f, 0.1f, 1.0f); //but override this function
+    Application::initGraphics(); //initgraphics depuis la superclasse
+    glClearColor(0.0f, 0.0f, 0.1f, 1.0f); //On surcharge la couleur
 }
 
 const char* FireWorkApp::getTitle()
@@ -273,12 +235,6 @@ void FireWorkApp::key(unsigned char key) //listener des touches
     case '1': create(1, 1, NULL); break;
     case '2': create(2, 1, NULL); break;
     case '3': create(3, 1, NULL); break;
-    case '4': create(4, 1, NULL); break;
-    case '5': create(5, 1, NULL); break;
-    case '6': create(6, 1, NULL); break;
-    case '7': create(7, 1, NULL); break;
-    case '8': create(8, 1, NULL); break;
-    case '9': create(9, 1, NULL); break;
     }
 }
 
@@ -329,13 +285,7 @@ void FireWorkApp::display() //fonction pour afficher notre feu d'artifice
             {
             case 1: glColor3f(1,0,0); break;
             case 2: glColor3f(1,0.5f,0); break;
-            case 3: glColor3f(1,1,0); break;
-            case 4: glColor3f(0,1,0); break;
-            case 5: glColor3f(0,1,1); break;
-            case 6: glColor3f(0.4f,0.4f,1); break;
-            case 7: glColor3f(1,0,1); break;
-            case 8: glColor3f(1,1,1); break;
-            case 9: glColor3f(1,0.5f,0.5f); break;
+            case 3: glColor3f(0,1,1); break;
             };
 
             const Vector3D &pos = firework->getPosition();
