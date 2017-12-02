@@ -1,63 +1,18 @@
-/*
- * Timing functions, frame management and profiling.
- *
- * Part of the Cyclone physics system.
- *
- * Copyright (c) Ian Millington 2003-2006. All Rights Reserved.
- *
- * This software is distributed under licence. Use of this software
- * implies agreement with all terms and conditions of the accompanying
- * software licence.
- */
-
 #include "timing.h"
+#include <stdlib.h>
+#include <sys/time.h>
 
-
-// Hold internal timing data for the performance counter.
+// flag pour le timing interne du pc
 static bool qpcFlag;
+#define TIMING_UNIX	1
+// pour linux
+typedef unsigned long long	LONGLONG;
 
-#if (__APPLE__ || __unix)
-	#define TIMING_UNIX	1
-
-	#include <stdlib.h>
-	#include <sys/time.h>
-
-	// assume unix based OS
-	typedef unsigned long long	LONGLONG;
-#else
-	#define TIMING_WINDOWS	1
-	// assume windows
-
-	// Import the high performance timer (c. 4ms).
-	#include <windows.h>
-	#include <mmsystem.h>
-
-	static double qpcFrequency;
-#endif
-
-
-
-// Internal time and clock access functions
 unsigned systemTime()
 {
-#if TIMING_UNIX
-	struct timeval tv;
-	gettimeofday(&tv, 0);
-
-	return tv.tv_sec * 1000 + tv.tv_usec/1000;
-
-#else
-    if(qpcFlag)
-    {
-        static LONGLONG qpcMillisPerTick;
-        QueryPerformanceCounter((LARGE_INTEGER*)&qpcMillisPerTick);
-        return (unsigned)(qpcMillisPerTick * qpcFrequency);
-    }
-    else
-    {
-        return unsigned(timeGetTime());
-    }
-#endif
+struct timeval tv;
+gettimeofday(&tv, 0);
+return tv.tv_sec * 1000 + tv.tv_usec/1000;
 
 }
 
@@ -66,42 +21,18 @@ unsigned TimingData::getTime()
     return systemTime();
 }
 
-#if TIMING_WINDOWS
-unsigned long systemClock()
-{
-    __asm {
-    	rdtsc;
-    }
-}
-#endif
-
+//récuperation du système de temps interne
 unsigned long TimingData::getClock()
 {
-
-#if TIMING_UNIX
 	struct timeval tv;
 	gettimeofday(&tv, 0);
-
 	return tv.tv_sec * 1000 + tv.tv_usec/1000;
-#else
-    return systemClock();
-#endif
 }
 
-// Sets up the timing system and registers the performance timer.
+//mise en place timer
 void initTime()
 {
-#if TIMING_UNIX
     qpcFlag = false;
-#else
-    LONGLONG time;
-
-    qpcFlag = (QueryPerformanceFrequency((LARGE_INTEGER*)&time) > 0);
-
-    // Check if we have access to the performance counter at this
-    // resolution.
-    if (qpcFlag) qpcFrequency = 1000.0 / time;
-#endif
 }
 
 
