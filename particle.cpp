@@ -9,6 +9,7 @@ void Particle::integrate(real duration)
     resulting_acceleration.add_scaled_vector(accumulated_force, inverse_mass);//workout acceleration from the force
     velocity.add_scaled_vector(resulting_acceleration, duration);//update linear velocity
     velocity *= real_pow(damping, duration);
+    clearAccumulator();
 
 }
 

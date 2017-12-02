@@ -39,7 +39,6 @@ Vector3D::Vector3D()
     x = 0;
     y = 0;
     z = 0;
-    std::cout << "Vector created by default\n";
 }
 
 Vector3D::Vector3D(real x, real y, real z)
@@ -47,7 +46,6 @@ Vector3D::Vector3D(real x, real y, real z)
     this->x = x;
     this->y = y;
     this->z = z;
-    std::cout << "Vector created\n";
 }
 
 void Vector3D::invert()
