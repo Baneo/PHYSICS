@@ -1,16 +1,4 @@
-/*
- * Timing functions, frame management and profiling.
- *
- * Part of the Cyclone physics system.
- *
- * Copyright (c) Ian Millington 2003-2006. All Rights Reserved.
- *
- * This software is distributed under licence. Use of this software
- * implies agreement with all terms and conditions of the accompanying
- * software licence.
- */
-
-#include "timing.h"
+#include "inc.h"
 
 
 // Hold internal timing data for the performance counter.

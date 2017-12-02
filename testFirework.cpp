@@ -1,21 +1,15 @@
-#include <GL/glut.h>
-#include <iostream>
-#include <stdio.h>
 #include "inc.h" //Include global
-#include "app.h"
-#include "timing.h"
 
-
-class Firework : public Particle
+class Firework : public Particle //Un feu d'artifice est un certain type de particule
 {
 
 
 public:
-	//Type de firework
+	//Type de feu
     int type;
 
     /**
-    Temps avant explosion de notre particule.
+    Temps avant explosion de notre feu d'artifice.
      */
     real age;
 
@@ -242,8 +236,8 @@ void FireWorkApp::initFireworkRules()
 
 void FireWorkApp::initGraphics()
 {
-    Application::initGraphics();
-    glClearColor(0.0f, 0.0f, 0.1f, 1.0f);
+    Application::initGraphics(); //Get the initGraphics from superclass
+    glClearColor(0.0f, 0.0f, 0.1f, 1.0f); //but override this function
 }
 
 const char* FireWorkApp::getTitle()
@@ -253,7 +247,7 @@ const char* FireWorkApp::getTitle()
 
 void FireWorkApp::create(int type, const Firework *parent)
 {
-    FireworkRule *rule = rules + (type - 1);
+    FireworkRule *rule = rules + (type - 1); //creation de l'application
     rule->create(fireworks+nextFirework, parent);
     nextFirework = (nextFirework + 1) % maxFireworks;
 }
@@ -266,9 +260,9 @@ void FireWorkApp::create(int type, int number, const Firework *parent)
     }
 }
 
-void FireWorkApp::key(unsigned char key)
+void FireWorkApp::key(unsigned char key) //listener des touches
 {
-    switch (key)
+    switch (key) //ici chaque touche va creer un feu different
     {
     case '1': create(1, 1, NULL); break;
     case '2': create(2, 1, NULL); break;
@@ -310,7 +304,7 @@ void FireWorkApp::update()
     Application::update();
 }
 
-void FireWorkApp::display()
+void FireWorkApp::display() //fonction pour afficher notre feu d'artifice
 {
     const static real size = 0.1f;
 
@@ -357,7 +351,7 @@ extern Application* getApplication();
 
 Application* app;
 
-void createWindow(const char* title)
+void createWindow(const char* title) //creation de la fenetre d'affichage
 {
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(200, 200);
@@ -366,7 +360,7 @@ void createWindow(const char* title)
 }
 
 
-void update()
+void update() 
 {
     TimingData::get().update();
     app->update();
