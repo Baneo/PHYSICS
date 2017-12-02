@@ -5,13 +5,9 @@
 
 #include "precision.h"
 #include "vector3D.h"
-#include "timing.h"
 #include "particle.h"
 #include <time.h>
 #include <stdlib.h>
 #include <cfloat>
-#include <GL/glut.h>
-#include "app.h"
-#include <iostream>
-#include <stdio.h>
+
 

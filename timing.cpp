@@ -1,7 +1,7 @@
-#include "inc.h"
+#include "timing.h"
 
 
-// Hold internal timing data for the performance counter.
+// flag pour le timing interne du pc
 static bool qpcFlag;
 
 #if (__APPLE__ || __unix)
@@ -10,22 +10,17 @@ static bool qpcFlag;
 	#include <stdlib.h>
 	#include <sys/time.h>
 
-	// assume unix based OS
+	// pour linux
 	typedef unsigned long long	LONGLONG;
 #else
 	#define TIMING_WINDOWS	1
-	// assume windows
-
-	// Import the high performance timer (c. 4ms).
+	//pour windows
 	#include <windows.h>
 	#include <mmsystem.h>
 
 	static double qpcFrequency;
 #endif
 
-
-
-// Internal time and clock access functions
 unsigned systemTime()
 {
 #if TIMING_UNIX
@@ -63,6 +58,7 @@ unsigned long systemClock()
 }
 #endif
 
+//récuperation du système de temps interne
 unsigned long TimingData::getClock()
 {
 

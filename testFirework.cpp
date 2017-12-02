@@ -1,4 +1,10 @@
 #include "inc.h" //Include global
+#include <GL/glut.h>
+#include "app.h"
+#include <iostream>
+#include <stdio.h>
+#include "timing.h"
+
 
 class Firework : public Particle //Un feu d'artifice est un certain type de particule
 {
