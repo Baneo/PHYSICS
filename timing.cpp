@@ -1,46 +1,18 @@
 #include "timing.h"
-
+#include <stdlib.h>
+#include <sys/time.h>
 
 // flag pour le timing interne du pc
 static bool qpcFlag;
-
-#if (__APPLE__ || __unix)
-	#define TIMING_UNIX	1
-
-	#include <stdlib.h>
-	#include <sys/time.h>
-
-	// pour linux
-	typedef unsigned long long	LONGLONG;
-#else
-	#define TIMING_WINDOWS	1
-	//pour windows
-	#include <windows.h>
-	#include <mmsystem.h>
-
-	static double qpcFrequency;
-#endif
+#define TIMING_UNIX	1
+// pour linux
+typedef unsigned long long	LONGLONG;
 
 unsigned systemTime()
 {
-#if TIMING_UNIX
-	struct timeval tv;
-	gettimeofday(&tv, 0);
-
-	return tv.tv_sec * 1000 + tv.tv_usec/1000;
-
-#else
-    if(qpcFlag)
-    {
-        static LONGLONG qpcMillisPerTick;
-        QueryPerformanceCounter((LARGE_INTEGER*)&qpcMillisPerTick);
-        return (unsigned)(qpcMillisPerTick * qpcFrequency);
-    }
-    else
-    {
-        return unsigned(timeGetTime());
-    }
-#endif
+struct timeval tv;
+gettimeofday(&tv, 0);
+return tv.tv_sec * 1000 + tv.tv_usec/1000;
 
 }
 
@@ -49,43 +21,18 @@ unsigned TimingData::getTime()
     return systemTime();
 }
 
-#if TIMING_WINDOWS
-unsigned long systemClock()
-{
-    __asm {
-    	rdtsc;
-    }
-}
-#endif
-
 //récuperation du système de temps interne
 unsigned long TimingData::getClock()
 {
-
-#if TIMING_UNIX
 	struct timeval tv;
 	gettimeofday(&tv, 0);
-
 	return tv.tv_sec * 1000 + tv.tv_usec/1000;
-#else
-    return systemClock();
-#endif
 }
 
-// Sets up the timing system and registers the performance timer.
+//mise en place timer
 void initTime()
 {
-#if TIMING_UNIX
     qpcFlag = false;
-#else
-    LONGLONG time;
-
-    qpcFlag = (QueryPerformanceFrequency((LARGE_INTEGER*)&time) > 0);
-
-    // Check if we have access to the performance counter at this
-    // resolution.
-    if (qpcFlag) qpcFrequency = 1000.0 / time;
-#endif
 }
 
 
