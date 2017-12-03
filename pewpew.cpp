@@ -141,7 +141,6 @@ void PewpewApp::display()
 
 void PewpewApp::mouse(int button, int state, int x, int y)
 {
-    // Fire the current weapon.
     if (state == GLUT_DOWN) fire();
 }
 
@@ -182,7 +181,6 @@ void update()
 void display()
 {
     app->display();
-    // Update the displayed content.
     glFlush();
     glutSwapBuffers();
 }
