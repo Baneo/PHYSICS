@@ -2,14 +2,26 @@ CC=g++
 GLUTFLAGS=-lGL -lGLU -lglut
 
 INCLUDES=inc.h timing.h app.h vector3D.h particle.h 
-CPPFILES=testFirework.cpp timing.cpp vector3D.cpp app.cpp particle.cpp
-EXECNAME=testFirework
+CPPFIREWORK=firework.cpp timing.cpp vector3D.cpp app.cpp particle.cpp
+CPPPEW=pewpew.cpp timing.cpp vector3D.cpp app.cpp particle.cpp
+EXECNAME=firework
+PEWNAME=pewpew
 
-main: 
-	$(CC) $(CPPFILES) -g -o $(EXECNAME) $(GLUTFLAGS)
+all: pewpew firework
+
+firework: 
+	$(CC) $(CPPFIREWORK) -g -o $(EXECNAME) $(GLUTFLAGS)
+
+pewpew: 
+	$(CC) $(CPPPEW) -g -o $(PEWNAME) $(GLUTFLAGS)
+
+.PHONY: clean 
 
 clean:
-	rm -rf $(EXECNAME)
+	rm -rf $(EXECNAME) $(PEWNAME)
 
-run:
+runfirework:
 	./$(EXECNAME)
+
+runpewpew:
+	./$(PEWNAME)	 
